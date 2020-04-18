@@ -1,0 +1,38 @@
+Public X As Long
+Public Y As Long
+Public Value As String
+Public AvailableOptions As New Collection
+Public Entropy As Double
+
+Public Function UpdateEntropy()
+    Dim LConst As Double
+    Dim CConst As Double
+    Dim OConst As Double
+    Dim Thing As Variant
+    
+    LConst = 1
+    CConst = 1
+    OConst = 1
+    
+    For Each Thing In AvailableOptions
+        Select Case Thing
+            Case "L"
+                LConst = 0.3
+            Case "C"
+                CConst = 0.8
+            Case "O"
+                OConst = 0.9
+        End Select
+    Next Thing
+    
+    Entropy = LConst * Log(LConst) - CConst * Log(CConst) - OConst * Log(OConst)
+End Function
+
+Public Function UpdateValue()
+    Dim Thing As Variant
+    
+    For Each Thing In AvailableOptions
+        Me.Value = Me.Value & Thing & ","
+    Next Thing
+End Function
+
